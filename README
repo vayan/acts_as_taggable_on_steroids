@@ -27,7 +27,7 @@ Rails 3:
 
 Generate and apply the migration:
 
-  ruby script/generate acts_as_taggable_migration
+  rails generate acts_as_taggable_on_steroids
   rake db:migrate
 
 === Basic tagging
