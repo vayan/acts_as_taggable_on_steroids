@@ -1,3 +1,8 @@
+require 'tag'
+require 'tagging'
+require 'tag_list'
+require 'tags_helper'
+
 module ActiveRecord #:nodoc:
   module Acts #:nodoc:
     module Taggable #:nodoc:
