@@ -219,7 +219,11 @@ module ActiveRecord #:nodoc:
         def tag_counts(options = {})
           return [] if tag_list.blank?
           
-          options[:conditions] = self.class.send(:merge_conditions, options[:conditions], self.class.send(:tags_condition, tag_list))
+          # options[:conditions] = self.class.send(:merge_conditions, options[:conditions], self.class.send(:tags_condition, tag_list))
+          # merge_conditions no longer exists in rails3, not sure how to fix
+          # but this stops it blowing up. Probably need something with
+          # Arel.where.where
+          options[:conditions] = self.class.send(:tags_condition, tag_list)
           self.class.tag_counts(options)
         end
         
