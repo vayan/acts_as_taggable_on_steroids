@@ -141,7 +141,14 @@ module ActiveRecord #:nodoc:
         
         def find_options_for_tag_counts(options = {})
           options = options.dup
-          scope = scope(:find)
+          
+          # Fix for Rails3, cribbed from 
+          # fragility/acts_as_taggable_on_steroids fork
+          if ActiveRecord::VERSION::MAJOR >= 3
+            scope = {}
+          else
+            scope = scope(:find) || {}
+          end
           
           conditions = []
           conditions << send(:sanitize_conditions, options.delete(:conditions)) if options[:conditions]
