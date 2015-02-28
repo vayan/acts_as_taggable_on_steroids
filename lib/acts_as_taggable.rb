@@ -23,7 +23,6 @@ module ActiveRecord #:nodoc:
           include ActiveRecord::Acts::Taggable::InstanceMethods
           extend ActiveRecord::Acts::Taggable::SingletonMethods
           
-          alias_method_chain :reload, :tag_list
         end
         
         def cached_tag_list_column_name
@@ -234,9 +233,9 @@ module ActiveRecord #:nodoc:
           self.class.tag_counts(options)
         end
         
-        def reload_with_tag_list(*args) #:nodoc:
+        def reload(options = nil) #:nodoc:
           @tag_list = nil
-          reload_without_tag_list(*args)
+          super(options)
         end
       end
     end
